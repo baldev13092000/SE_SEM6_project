@@ -1,0 +1,49 @@
+{% load static %}
+{% url 'home' as userhome %}
+{% url 'userSect' as userSection %}
+{% url 'newUser' as newuserregistration %}
+{% url 'uslogin' as userlogin %}
+<html>
+<head>
+	<title>{% block title %} {% endblock %}</title>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+	<link rel="stylesheet" href="{% static "css/style1.css" %}">
+	<link type="text/css" rel="stylesheet" href={% static "css/materialize.min.css" %} media="screen,projection" />
+	
+	{% block css %} {% endblock %}
+	<style type = "text/css">
+		*{font-size:20px;font-family:calibri;}
+		.nav { background-color:blue;}
+		.nav a{color:white;text-decoration:none;padding:30px;}
+		.active{
+		background-color:black;
+		color:white;
+		}
+	{% block style %} {% endblock %}
+	</style>
+	
+
+	
+</head>
+<body>		
+	<nav class="blue darken-1">
+    	<div class="nav-wrapper">
+		<a href="#" class="brand-logo">Smart Voting System</a>
+		<ul id="nav-mobile" class="right hide-on-med-and-down">
+		<li><a href="{% url 'home' %}" id="backhome" class="{% if request.path == userhome %} active {% endif %}">Home</a></li>
+		<li><a href="{% url 'userSect' %}" id="backhome" class="{% if request.path == userSection %} active {% endif %}">Dashboard</a></li>
+		<li><a href="{% url 'newUser' %}" id="newuser" class="{% if request.path == newuserregistration %} active {% endif %}">New User Registration</a></li>
+		<li><a href="{% url 'uslogin' %}" id = "uslogin" class="{% if request.path == userlogin %} active {% endif %}">Login</a></li>
+		{% if user.is_authenticated %}
+		<li><a href="{% url 'uslogout' %}">Logout</a></li>
+		{% endif %}
+		</ul>
+	</div>
+	</nav>
+	{% block content %} 
+	{% endblock %}
+<script type="text/javascript">
+{% block script %} {% endblock %}
+</script>
+</body>
+</html>
